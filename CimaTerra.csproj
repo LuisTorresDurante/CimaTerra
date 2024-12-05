@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<!-- Import tModLoader mod properties -->
+	<Import Project="..\tModLoader.targets" />
+
+	<!-- General -->
+	<PropertyGroup>
+		
+	</PropertyGroup>
+
+	<!-- References -->
+	<ItemGroup>
+	  <Folder Include="Content\Items\Mage\" />
+	  <Folder Include="Content\Items\Range\" />
+	  <Folder Include="Content\Sprites\Items\Mage\" />
+	  <Folder Include="Content\Sprites\Items\Melee\" />
+	  <Folder Include="Content\Sprites\Items\Projectiles\" />
+	  <Folder Include="Content\Sprites\Items\Range\" />
+	  <Folder Include="Content\Sprites\Items\Summoner\" />
+	</ItemGroup>
+
+</Project>
