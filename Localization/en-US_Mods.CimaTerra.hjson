@@ -15,6 +15,29 @@ Items: {
 		DisplayName: Cima Cuerno
 		Tooltip: ""
 	}
+
+	BoletoGanador: {
+		DisplayName: Boleto Ganador
+		Tooltip: ""
+	}
+
+	PacoStaff: {
+		DisplayName: Paco Staff
+		Tooltip: ""
+	}
 }
 
-Projectiles.Cuernos.DisplayName: Cuernos
+Projectiles: {
+	Cuernos.DisplayName: Cuernos
+	Casa.DisplayName: Casa
+	PacoMinion.DisplayName: Paco Minion
+	Carro.DisplayName: Carro
+	FajoBilletes.DisplayName: Fajo Billetes
+}
+
+Buffs: {
+	MinionPacoBuff: {
+		DisplayName: Minion Paco Buff
+		Description: Mods.CimaTerra.Buffs.MinionPacoBuff.Description
+	}
+}

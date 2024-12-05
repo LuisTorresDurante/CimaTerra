@@ -9,25 +9,65 @@ using Terraria;
 using Terraria.ModLoader;
 using CimaTerra.Content.Items.Projectiles;
 using CimaTerra.Content.Items.Projectiles.BoletoGanador;
+using Microsoft.Xna.Framework;
 namespace CimaTerra.Content.Items.Mage.BoletoGanador
 {
     internal class BoletoGanador : ModItem
     {
+
         public override void SetDefaults()
         {
-            // DefaultToStaff handles setting various Item values that magic staff weapons use.
-            // Replace the default projectile with your custom projectile "Casa"
-            Item.DefaultToStaff(ModContent.ProjectileType<Projectiles.BoletoGanador.Casa>(), 7, 20, 11);
+            // Set default staff properties
+            Item.DefaultToStaff(ModContent.ProjectileType<Projectiles.BoletoGanador.Casa>(), 7, 20, 11); // Default projectile
             Item.width = 34;
             Item.height = 40;
-            Item.UseSound = SoundID.Item71;
+            Item.UseSound = SoundID.Item70;
 
-            // A special method that sets the damage, knockback, and bonus critical strike chance.
-            // This weapon has a crit of 32% which is added to the player's default crit chance of 4%
+            // Set weapon values
             Item.SetWeaponValues(25, 6, 32);
 
+            // Set shop values
             Item.SetShopValues(ItemRarityColor.LightRed4, 10000);
         }
+
+        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            int chosenProjectileType = 0;
+            float newSpeed = 0.1f; // Default speed
+            int extraDamage = 0;  // Additional damage modifier
+
+            switch (Main.rand.Next(3))
+            {
+                case 0:
+                    chosenProjectileType = ModContent.ProjectileType<Projectiles.BoletoGanador.Casa>();
+                    newSpeed = 1f;  // Modify speed for Casa
+                    extraDamage =   20; // Add extra damage for Casa
+                    break;
+
+                case 1:
+                    chosenProjectileType = ModContent.ProjectileType<Projectiles.BoletoGanador.Carro>();
+                    newSpeed = 1.7f;  // Modify speed for Carro
+                    extraDamage = 5; // Add extra damage for Carro
+                    break;
+
+                case 2:
+                    chosenProjectileType = ModContent.ProjectileType<Projectiles.BoletoGanador.FajoBilletes>();
+                    newSpeed = 2.3f;   
+                    extraDamage = -6; 
+                    break;
+            }
+
+            // Adjust velocity using the modified speed
+            velocity *= newSpeed;
+
+            // Spawn the projectile
+            Projectile.NewProjectile(source, position, velocity, chosenProjectileType, damage + extraDamage, knockback, player.whoAmI);
+
+            return false;
+        }
+
+
+
 
 
         // Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.

@@ -11,21 +11,21 @@ using Microsoft.Xna.Framework;
 
 namespace CimaTerra.Content.Items.Projectiles.BoletoGanador
 {
-    internal class Casa : ModProjectile
+    internal class Carro : ModProjectile
     {
         public override void SetDefaults()
         {
-            Projectile.width = 60;
-            Projectile.height = 42;
+            Projectile.width = 54;
+            Projectile.height = 20;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
-            Projectile.penetrate = 3;
-            Projectile.timeLeft = 600;
+            Projectile.penetrate = 1;
+            Projectile.timeLeft = 1000;
         }
 
         public override void AI()
         {
-            Projectile.ai[0] = 0.1f; // Gravity-like effect
+            Projectile.ai[0] = 0.01f; // Gravity-like effect
             Projectile.velocity.Y += Projectile.ai[0];
 
             if (Main.rand.NextBool(3))
@@ -42,6 +42,7 @@ namespace CimaTerra.Content.Items.Projectiles.BoletoGanador
             if (Projectile.penetrate <= 0)
             {
                 Projectile.Kill();
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke);
                 SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
             }
             else
@@ -66,6 +67,7 @@ namespace CimaTerra.Content.Items.Projectiles.BoletoGanador
             for (int k = 0; k < 5; k++)
             {
                 Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke);
+                //Dust.NewDust(Projectile.position + Projectile.velocity, Projectile.width, Projectile.height, ModContent.DustType<Sparkle>(), Projectile.oldVelocity.X * 0.5f, Projectile.oldVelocity.Y * 0.5f);
             }
         }
 
